@@ -1,8 +1,0 @@
-Section: misc
-Priority: optional
-Package: xubapp
-Version: 1.0.0
-Maintainer: Marcelo Klumpp <elppansmk@gmail.com>
-Depends: bash, sed, sudo, coreutils
-Architecture: all
-Description: Aplicativo para uso pós instalação de outros pacotes básicos e mais usados de forma interativa e automática.
