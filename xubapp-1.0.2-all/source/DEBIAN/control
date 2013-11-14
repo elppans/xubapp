@@ -1,7 +1,7 @@
 Section: misc
 Priority: optional
 Package: xubapp
-Version: 1.0.1
+Version: 1.0.2
 Maintainer: Marcelo Klumpp <elppansmk@gmail.com>
 Depends: bash, sed, sudo, coreutils
 Architecture: all
