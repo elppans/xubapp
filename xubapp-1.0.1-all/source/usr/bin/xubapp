@@ -8,8 +8,11 @@ Aviso() {
 	echo -e '\b Na instalacao de pacotes importantes.'
 	echo -e '\b E necessario habilitar manualmente todos os repositorios via \n "Canais de Software" na "Central de programas".\n'
 	echo -e '\b Apos isto sera feito instalacoes por secao.\n\n'
-	echo -e '\b Tudo o que vou fazer de agora em diante sera por etapa,'
-	echo -e '\b Voce pode escolher entre usar a opcao de preferencia ou sair.'
+	echo -e '\b Tudo o que vou fazer de agora em diante sera por etapa.'
+	echo -e '\b Sao 3 etapas. Passando primeiro pela "Compilacao e Manutencao";'
+	echo -e '\b A segunda etapa é sobre "Multimedia e Codecs";'
+	echo -e '\b E finalmente a terceira e ultima etapa, que e sobre "Itens Opcionais"'
+	echo -e '\b Voce pode escolher entre usar a opcao de preferencia, pular ou sair.'
 	echo -e '\b Lembre-se de que, qualquer decisao e de sua propria conta e risco.\n\n'
 	echo -e '\b Para escolher, aperte a letra em que esta entre parenteses (Maiusculo) \n e aperte "Enter".\n\n'
 	echo -e '\b Deseja continuar ou Sair?'
@@ -38,6 +41,7 @@ Sair() {
 }
 Aviso
 
+###Inicio addgpg
 addgpg() {
 	clear
 	echo -e '\n Adicionar GPG e Repositorios ao sistema.\n'
@@ -55,18 +59,19 @@ addgpg() {
 	echo -e '\b Adicionar Repositorios (A)'
 	echo -e '\b Apenas fazer um upgrade (U)'
 	echo -e '\b Pular para a etapa, "Compilacao e Manutencao" (C)'
-	echo -e '\b Pular para a etapa, "Multimedia e Codecs" (M)'
+#	echo -e '\b Pular para a etapa, "Multimedia e Codecs" (M)'
 	echo -e '\b Sair da configuracao (Q)'
 read opcao
 case $opcao in
 	A) Adicionar ;;
 	U) Upgrade ;;
 	C) Compilacao ;;
-	M) MultimediaCodecs ;;
+#	M) MultimediaCodecs ;;
 	Q) Sair ;;
 	*) "Opcao invalida" ; echo ; addgpg ;;
 esac
 }
+###Inicio Adicionar
 Adicionar () {
 	clear
 	echo -e '\n Adicionar repositorios...'
@@ -173,8 +178,8 @@ sudo add-apt-repository -y ppa:webupd8team/java
 sudo touch /etc/apt/sources.list.d/libdvdcss.list
 sudo rm -rf /etc/apt/sources.list.d/libdvdcss.list
 sudo touch /etc/apt/sources.list.d/libdvdcss.list
-sudo sh -c "echo 'deb http://ftp://ftp.videolan.org/pub/debian/stable /' >> /etc/apt/sources.list.d/libdvdcss.list"
-sudo sh -c "echo 'deb-src http://ftp://ftp.videolan.org/pub/debian/stable /' >> /etc/apt/sources.list.d/libdvdcss.list"
+sudo sh -c "echo 'deb http://download.videolan.org/pub/debian/stable/ /' >> /etc/apt/sources.list.d/libdvdcss.list"
+sudo sh -c "echo 'deb-src http://download.videolan.org/pub/debian/stable/ /' >> /etc/apt/sources.list.d/libdvdcss.list"
 wget -O - http://download.videolan.org/pub/debian/videolan-apt.asc | sudo apt-key add -
 clear
 	echo -e '\n Atualizando os repositorios...'
@@ -230,8 +235,11 @@ clear
 	echo -e '\b Indo para a proxima etapa'
 	echo -e '\b Aguarde 30 Segundos ou aperte "Enter".'
 read -t 30
-	Upgrade
+	ConfInstall
 }
+###Fim Adicionar
+
+###Inicio Upgrade
 Upgrade (){
 	clear
 	echo -e '\n Apenas fazer um upgrade...'
@@ -252,8 +260,18 @@ if (ls /var/lib/apt | grep -i lists.old)
 			then
 		sudo -i mv /var/lib/apt/lists /var/lib/apt/lists.old
 		sudo -i mkdir -p  /var/lib/apt/lists/partial
+		sudo -i apt-get -y clean
+		sudo -i apt-get -y autoclean
+		sudo -i apt-get -f -y autoremove
+		sudo -i apt-get -y update
+		sudo -i apt-get -f -y dist-upgrade
 			else
 		sudo -i mkdir -p  /var/lib/apt/lists/partial
+		sudo -i apt-get -y clean
+		sudo -i apt-get -y autoclean
+		sudo -i apt-get -f -y autoremove
+		sudo -i apt-get -y update
+		sudo -i apt-get -f -y dist-upgrade
 	fi
 #list1fim
 			else
@@ -262,8 +280,18 @@ if (ls /var/lib/apt | grep -i lists.old)
 			then
 		sudo -i mv /var/lib/apt/lists /var/lib/apt/lists.old
 		sudo -i mkdir -p  /var/lib/apt/lists/partial
+		sudo -i apt-get -y clean
+		sudo -i apt-get -y autoclean
+		sudo -i apt-get -f -y autoremove
+		sudo -i apt-get -y update
+		sudo -i apt-get -f -y dist-upgrade
 			else
 		sudo -i mkdir -p  /var/lib/apt/lists/partial
+		sudo -i apt-get -y clean
+		sudo -i apt-get -y autoclean
+		sudo -i apt-get -f -y autoremove
+		sudo -i apt-get -y update
+		sudo -i apt-get -f -y dist-upgrade
 	fi
 #listfim2
 fi
@@ -271,12 +299,12 @@ fi
 
 cd -
 
-sudo -i apt-get -y clean
-sudo -i apt-get -y autoclean
-sudo -i apt-get -y update
+#sudo -i apt-get -y clean
+#sudo -i apt-get -y autoclean
+#sudo -i apt-get -y update
 #Fim
 #Fim "BADSIG ID"
-	sudo apt-get -y dist-upgrade
+#	sudo apt-get -y dist-upgrade
 	clear
 	echo -e '\n Upgrade terminado.'
 	echo -e '\b Indo para a proxima etapa'
@@ -284,6 +312,9 @@ sudo -i apt-get -y update
 read -t 30
 	ConfInstall
 }
+###Fim Upgrade
+
+###Inicio Compilacao
 Compilacao (){
 	clear
 	echo -e '\n Pular etapa para Compilacao/Manutencao...'
@@ -291,15 +322,16 @@ Compilacao (){
 	read -t 30
 	ConfInstall
 }
-Sair (){
-	clear
-	echo -e '\n Saindo da configuracao...'
-	echo -e '\b Espere 30 segundos ou aperte "Enter".'
-	read -t 30
-	exit 0
-}
+#Sair (){
+#	clear
+#	echo -e '\n Saindo da configuracao...'
+#	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+#	read -t 30
+#	exit 0
+#}
 addgpg
 
+###Inicio ConfInstall
 ConfInstall() {
 	clear
 	echo -e '\n Iniciando etapa compiladores e manutencao...\n'
@@ -315,11 +347,20 @@ case $opcao in
 	*) "Opcao invalida" ; echo  ; ConfInstall ;;
 esac
 }
+Sair (){
+	clear
+	echo -e '\n Saindo da configuracao...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	exit 0
+}
+###Inicio Continuar ConfInstall
 Continuar() {
 	clear
 	echo -e '\n Continuando com a configuracao...'
 	echo -e '\b Espere 30 segundos ou aperte "Enter".'
 	read -t 30
+###unity-lens-shopping 1
 if (dpkg -l |grep 'ii  unity-lens-shopping')
 	then
 clear
@@ -345,6 +386,7 @@ Continuar() {
 	sudo apt-get -y remove unity-lens-shopping
 	read -t 2
 	clear
+	compilacoes1
 }
 Pular() {
 	clear
@@ -354,10 +396,16 @@ Pular() {
 	compilacoes1
 }
 unitylensshopping
+###unity-lens-shopping 1 Fim
 	else
 		clear
 fi
+###Fim Continuar ConfInstall
+}
+ConfInstall
+###Fim ConfInstall
 
+###Inicio Compilacoes 1
 compilacoes1() {
 	clear
 	echo -e '\n Instalar pacotes necessarios para compilacoes...\n'
@@ -411,7 +459,9 @@ Pular() {
 	compilacoes2
 }
 compilacoes1
+###Fim Compilacoes 1
 
+### Inicio Compilacoes 2
 compilacoes2() {
 	clear
 	echo -e '\n Instalando programa grafico para configuracao do servidor samba...\n'
@@ -448,7 +498,9 @@ Pular() {
 	compilacoes3
 }
 compilacoes2
+###Fim Compilacoes 2
 
+###Inicio Compilacoes 3
 compilacoes3() {
 	clear
 	echo -e '\n Instalando pacotes em linha de comando para verificacao de IPs...\n'
@@ -483,7 +535,9 @@ Pular() {
 	compilacoes4
 }
 compilacoes3
+###Fim Compilacoes 3
 
+###Inicio Compilacoes 4
 compilacoes4() {
 	clear
 	echo -e '\n Instalando pacote para otimizar a memoria...\n'
@@ -517,7 +571,9 @@ Pular() {
 	compilacoes5
 }
 compilacoes4
+###Fim Compilacoes 4
 
+###Inicio Compilacoes 5
 compilacoes5() {
 	clear
 	echo -e '\n Instalando prelink...\n'
@@ -568,7 +624,9 @@ Pular() {
 	compilacoes6
 }
 compilacoes5
+###Fim Compilacoes 5
 
+###Inicio Compilacoes 6
 compilacoes6() {
 	clear
 	echo -e '\n Instalacao do Mesa-utils...\n'
@@ -604,7 +662,9 @@ Pular() {
 	compilacoes7
 }
 compilacoes6
+###Fim Compilacoes 6
 
+##inicio Compilacoes 7
 compilacoes7() {
 	clear
 	echo -e '\n Instalacao de gerador de boot...\n '
@@ -644,16 +704,17 @@ Pular() {
 	MultimediaCodecs
 }
 compilacoes7
-
-}
-Sair() {
-	clear
-	echo -e '\n Saindo da configuracao...'
-	echo -e '\b Espere 30 segundos ou aperte "Enter".'
-	read -t 30
-	exit 0
-}
-ConfInstall
+###Fim Compilacoes 7
+#}
+#Sair() {
+#	clear
+#	echo -e '\n Saindo da configuracao...'
+#	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+#	read -t 30
+#	exit 0
+#}
+#ConfInstall
+###Fim Confinstall
 
 MultimediaCodecs() {
 	clear
@@ -1262,7 +1323,7 @@ ConvidadoDes0() {
 	clear
 	echo -e '\n Desativando Usuario "Convidado".\n'
 	read -t 5
-sudo sh -c '"allow-guest=false" >> /etc/lightdm/lightdm.conf'
+sudo sh -c 'echo "allow-guest=false" >> /etc/lightdm/lightdm.conf'
 echo -e '\n Conta ocultada, para o ativar novamente edite o arquivo\n /etc/lightdm/lightdm.conf\n\n E comente a linha allow-guest=false'
 	clear
 	echo -e '\n Espere 30 segundos ou aperte "Enter".'
