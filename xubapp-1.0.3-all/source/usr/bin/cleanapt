@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#Inicio
+sudo -i apt-get -y clean
+sudo -i apt-get -y autoclean
+cd /var/lib/apt
+
+#list.old	
+if (ls /var/lib/apt | grep -i lists.old)
+			then
+		sudo -i rm -rfv /var/lib/apt/lists.old
+#list1
+	if (ls /var/lib/apt | grep -i lists)
+			then
+		sudo -i mv /var/lib/apt/lists /var/lib/apt/lists.old
+		sudo -i mkdir -p  /var/lib/apt/lists/partial
+			else
+		sudo -i mkdir -p  /var/lib/apt/lists/partial
+	fi
+#list1fim
+			else
+#list2
+	if (ls /var/lib/apt | grep -i lists)
+			then
+		sudo -i mv /var/lib/apt/lists /var/lib/apt/lists.old
+		sudo -i mkdir -p  /var/lib/apt/lists/partial
+			else
+		sudo -i mkdir -p  /var/lib/apt/lists/partial
+	fi
+#listfim2
+fi
+#list.oldfim
+
+cd -
+
+sudo -i apt-get -y clean
+sudo -i apt-get -y autoclean
+sudo -i apt-get -y update
+#Fim
