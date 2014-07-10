@@ -1278,16 +1278,16 @@ read -t 10
 clear
 echo "A instalar o VirtualBox..."
 read -t 10
-sudo apt-get -y install virtualbox
+sudo apt-get -y install virtualbox virtualbox-dkms virtualbox-qt virtualbox-source virtualbox-guest-additions-iso
 sudo /etc/init.d/virtualbox restart
 read -t 5
-sudo wget -c "http://download.virtualbox.org/virtualbox/$(vboxmanage -v | cut -d '_' -f 1)/Oracle_VM_VirtualBox_Extension_Pack-$(vboxmanage -v | cut -d '_' -f 1)-$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack" -O "/tmp/Oracle_VM_VirtualBox_Extension_Pack-$(vboxmanage -v | cut -d '_' -f 1)-$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack"
-read -t 10
-clear
-echo "A instalar a extencao do VirtualBox..."
-sudo VBoxManage extpack install "/tmp/Oracle_VM_VirtualBox_Extension_Pack-$(vboxmanage -v | cut -d '_' -f 1)-$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack" --replace
-read -t 10
-clear
+#sudo wget -c "http://download.virtualbox.org/virtualbox/$(vboxmanage -v | cut -d '_' -f 1)/Oracle_VM_VirtualBox_Extension_Pack-$(vboxmanage -v | cut -d '_' -f 1)-$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack" -O "/tmp/Oracle_VM_VirtualBox_Extension_Pack-$(vboxmanage -v | cut -d '_' -f 1)-$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack"
+#read -t 10
+#clear
+#echo "A instalar a extencao do VirtualBox..."
+#sudo VBoxManage extpack install "/tmp/Oracle_VM_VirtualBox_Extension_Pack-$(vboxmanage -v | cut -d '_' -f 1)-$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack" --replace
+#read -t 10
+#clear
 echo "Habilitando suporte ao USB no VirtualBox..."
 sudo sed -i 's/SUBSYSTEM=="usb_device",/SUBSYSTEM=="usb_device", GROUP="vboxusers", MODE="0666",/g' /lib/udev/rules.d/40-virtualbox.rules
 sudo sed -i 's/ENV{DEVTYPE}=="usb_device",/ENV{DEVTYPE}=="usb_device", GROUP="vboxusers", MODE="0666",/g' /lib/udev/rules.d/40-virtualbox.rules
@@ -1300,22 +1300,22 @@ sudo usermod -a -G vboxusers "$SUDO_USER"
 fi
 read -t 10
 clear
-echo "Adicionando comando para atualizar a extensao com mais facilidade pelo terminal"
-read -t 5
-sudo touch /usr/bin/update-vbox-extension
-sudo rm -rf /usr/bin/update-vbox-extension
-sudo touch /usr/bin/update-vbox-extension
-sudo chmod +x /usr/bin/update-vbox-extension
-sudo cat > /usr/bin/update-vbox-extension <<EOF
+#echo "Adicionando comando para atualizar a extensao com mais facilidade pelo terminal"
+#read -t 5
+#sudo touch /usr/bin/update-vbox-extension
+#sudo rm -rf /usr/bin/update-vbox-extension
+#sudo touch /usr/bin/update-vbox-extension
+#sudo chmod +x /usr/bin/update-vbox-extension
+#sudo cat > /usr/bin/update-vbox-extension <<EOF
 #!/bin/bash
-EOF
-sudo echo 'VBoxManage extpack uninstall $(vboxmanage -v | cut -d r -f 2) --force' >> /usr/bin/update-vbox-extension
-sudo echo 'wget -c "http://download.virtualbox.org/virtualbox/$(vboxmanage -v | cut -d '_' -f 1)/Oracle_VM_VirtualBox_Extension_Pack-$(vboxmanage -v | cut -d '_' -f 1)-$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack" -O "/tmp/Oracle_VM_VirtualBox_Extension_Pack-$(vboxmanage -v | cut -d '_' -f 1)-$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack"' >> /usr/bin/update-vbox-extension
-sudo echo 'sleep 3' >> /usr/bin/update-vbox-extension
-sudo echo 'sudo VBoxManage extpack install "/tmp/Oracle_VM_VirtualBox_Extension_Pack-$(vboxmanage -v | cut -d '_' -f 1)-$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack" --replace' >> /usr/bin/update-vbox-extension
-echo "Para fazer o update apos atualizar o VirtualBox via terminal, faca o comando (update-vbox-extension)"
-read -t 10
-clear
+#EOF
+#sudo echo 'VBoxManage extpack uninstall $(vboxmanage -v | cut -d r -f 2) --force' >> /usr/bin/update-vbox-extension
+#sudo echo 'wget -c "http://download.virtualbox.org/virtualbox/$(vboxmanage -v | cut -d '_' -f 1)/Oracle_VM_VirtualBox_Extension_Pack-$(vboxmanage -v | cut -d '_' -f 1)-$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack" -O "/tmp/Oracle_VM_VirtualBox_Extension_Pack-$(vboxmanage -v | cut -d '_' -f 1)-$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack"' >> /usr/bin/update-vbox-extension
+#sudo echo 'sleep 3' >> /usr/bin/update-vbox-extension
+#sudo echo 'sudo VBoxManage extpack install "/tmp/Oracle_VM_VirtualBox_Extension_Pack-$(vboxmanage -v | cut -d '_' -f 1)-$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack" --replace' >> /usr/bin/update-vbox-extension
+#echo "Para fazer o update apos atualizar o VirtualBox via terminal, faca o comando (update-vbox-extension)"
+#read -t 10
+#clear
 echo "Veja se o usuario esta adicionado no grupo vboxuser, se nao tiver, adicione manualmente"
 read -t 10
 clear
