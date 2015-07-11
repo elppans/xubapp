@@ -1,0 +1,523 @@
+#!/bin/bash
+
+XUBAPPINIT=/usr/share/xubapp/xubapp
+XUBAPPAVS=/usr/share/xubapp/xubapp-avs
+XUBAPPPNC=/usr/share/xubapp/xubapp.sh
+XUBAPPADG=/usr/share/xubapp/xubapp-addrepgpg
+XUBAPPCP=/usr/share/xubapp/xubapp-compilacoes
+XUBAPPMT=/usr/share/xubapp/xubapp-multimedia
+XUBAPPOPT=/usr/share/xubapp/xubapp-opcional
+XUBAPPUPG=/usr/share/xubapp/xubapp-upgrade
+CXUBAG=/var/cache/xubapp-ag
+CXUBUPG=/var/cache/xubapp-upg
+CXUBCM=/var/cache/xubapp-cm
+CXUBMC=/var/cache/xubapp-mc
+CXUBOP=/var/cache/xubapp-op
+CREPGPG=/var/cache/addgpg
+
+if [ -e $XUBAPPINIT ]
+		then
+###MultimediaCodecs Inicio
+MultimediaCodecsINI(){
+if [ -e $CXUBMC ]
+			then
+	clear
+	echo -e '\n Iniciando etapa Multimedia e Codecs...\n '
+	echo -e '\b Nesta etapa irei perguntar se deseja instalar o aplicativo multimedia ou nao.'
+	echo -e '\b E irei configurar automaticamente de acordo com suas escolhas.\n\n'
+	echo -e '\b Deseja continuar ou Sair?'
+	echo -e '\b Digite (C) para continuar.'
+	echo -e '\b Digite (Q) para sair.'
+read opcao
+case $opcao in
+	C|c) Continuar ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo  ; MultimediaCodecs ;;
+esac
+			else
+clear
+echo -e "Nao ha como executar esta acao!"
+echo -e "Voltando ao menu principal..."
+read -t 30
+$XUBAPPPNC
+fi
+}
+Sair(){
+	clear
+	echo -e '\n Saindo da configuracao...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	exit 0
+}
+###Continuar MultimediaCodecs
+Continuar(){
+	clear
+	echo -e '\n Continuando com a configuracao...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+	MultimediaCodecs1
+MultimediaCodecs1(){
+	clear
+	echo -e '\n Instalacao de codecs.\n'
+	echo -e '\b Sera instalado pacotes de Codecs necessários para varios \n tipos de videos e sons'
+	echo -e '\b E suporte a alguns decodificadores de audio/video\n\n'
+	echo -e '\b Deseja continuar ou pular?'
+	echo -e '\b Digite (C) para continuar.'
+	echo -e '\b Digite (P) para pular.'
+read opcao
+case $opcao in
+	C|c) Continuar ;;
+	P|p) Pular ;;
+	*) "Opcao invalida" ; echo  ; MultimediaCodecs1 ;;
+esac
+}
+Continuar(){
+	clear
+	echo -e '\nInstalando pacote...'
+	read -t 5
+if (lsb_release -cs | grep -i precise)
+	then
+sudo apt-get -y install gstreamer0.10-ffmpeg gstreamer0.10-plugins-ugly flashplugin-installer faad ffmpeg ffmpeg2theora mencoder libdvdcss2 freepats libmjpegtools-dev libass4 libcdaudio1 libdirac-encoder0 libflite1 libgme0 libgstreamer-plugins-bad0.10-0 libmimic0 libmms0 libmodplug1 libmpcdec6 libofa0 libslv2-9 libsoundtouch0 libspandsp2 libvo-aacenc0 libvo-amrwbenc0 libwildmidi-config libwildmidi1 libzbar0 libzvbi-common libzvbi0 gstreamer0.10-plugins-bad-multiverse gstreamer0.10-plugins-bad
+cd /var/cache/apt/archives/
+wget -c http://ubuntu.mirror.cambrium.nl/ubuntu//pool/universe/o/opus/libopus0_1.0.1-0ubuntu1_$(dpkg --print-architecture).deb
+sudo dpkg -i libopus0*.deb
+cd -
+sudo ldconfig -l ; sudo depmod -a
+read -t 3
+	else
+if (lsb_release -cs | grep -i trusty)
+	then
+sudo apt-get -y install $(lsb_release -is)-restricted-extras gstreamer0.10-ffmpeg gstreamer0.10-plugins-ugly flashplugin-installer faad ffmpeg ffmpeg2theora mencoder libdvdcss2 libdvdread4 libdvdnav4 freepats  libass4 libcdaudio1 libdirac-encoder0 libflite1 libgme0 libgstreamer-plugins-bad0.10-0 libmimic0 libmms0 libmodplug1 libmpcdec6 libofa0 libslv2-9 libsoundtouch0 libspandsp2 libvo-aacenc0 libvo-amrwbenc0 libwildmidi-config libwildmidi1 libzbar0 libzvbi-common libzvbi0 gstreamer0.10-plugins-bad-multiverse gstreamer0.10-plugins-bad libopus0 libavcodec-extra
+sudo chmod +x /usr/share/doc/libdvdread4/install-css.sh
+sudo sh /usr/share/doc/libdvdread4/install-css.sh
+read -t 3
+else
+sudo apt-get -y install $(lsb_release -is)-restricted-extras libavcodec-extra libdvdread4
+sudo chmod +x /usr/share/doc/libdvdread4/install-css.sh
+sudo sh /usr/share/doc/libdvdread4/install-css.sh
+read -t 3
+# libdvdcss2: to recognize DVD, libdvdread4: to read DVD, libdvdnav4: to navigate DVD
+fi
+fi
+	clear
+	echo -e '\n Instalacao concluida.'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+	MultimediaCodecs2
+}
+Pular(){
+	clear
+	echo -e '\n Pulando para o proximo aplicativo...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	MultimediaCodecs2
+}
+MultimediaCodecs1
+
+MultimediaCodecs2(){
+	clear
+	echo -e '\n Instalando pacotes para suporte a media para o Ubuntu e brasero.\n'
+	echo -e '\b cdtool. Tocador de CD de audio e controlador de CD-ROM baseados em texto.'
+	echo -e '\b dvd+rw-tools. Suite de ferramentas que torna possivel gravar imagens de DVD.'
+	echo -e '\b cdrdao.Suporte gravacao de CDs em modo "Disk-At-Once" (DAO).'
+	echo -e '\b normalize-audio. Ferramenta para ajustar o audio WAV, MP3 e OGG \n para um nivel de volume padrao.'
+	echo -e '\b vcdimager. Ferramentas para masterizar (S)VCD e ripping VCD.'
+	echo -e '\b dvdauthor. Gerador de DVD de filme a partir de um fluxo mpeg2 valido.'
+	echo -e '\b gnomebaker. Criador/Gravador de CD/DVD e ISO'
+	echo -e '\b sound-juicer. Extractor (ripper) de CDs com interface simples e facil de usar.\n\n'
+	echo -e '\b Deseja continuar ou pular?'
+	echo -e '\b Digite (C) para continuar.'
+	echo -e '\b Digite (P) para pular.'
+read opcao
+case $opcao in
+	C|c) Continuar ;;
+	P|p) Pular ;;
+	*) "Opcao invalida" ; echo  ; MultimediaCodecs2 ;;
+esac
+}
+Continuar(){
+	clear
+	echo -e '\n Instalando pacote...'
+	read -t 5
+sudo apt-get -y install cdtool dvd+rw-tools cdrdao normalize-audio vcdimager dvdauthor sound-juicer gnomebaker
+	clear
+	echo -e '\n Instalacao concluida.'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	MultimediaCodecs3
+	clear
+}
+Pular(){
+	clear
+	echo -e '\n Pulando para o proximo aplicativo...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	MultimediaCodecs3
+}
+MultimediaCodecs2
+
+MultimediaCodecs3(){
+	clear
+	echo -e '\n Instalando pacotes para ISO.\n '
+	echo -e '\b isomaster. Editor grafico de imagem de CD.'
+	echo -e '\b furiusisomount. Aplicativo para montar arquivos de imagem ISO, IMG, BIN, MDF e NG.\n\n'
+	echo -e '\b Deseja continuar ou pular?'
+	echo -e '\b Digite (C) para continuar.'
+	echo -e '\b Digite (P) para pular.'
+read opcao
+case $opcao in
+	C|c) Continuar ;;
+	P|p) Pular ;;
+	*) "Opcao invalida" ; echo  ; MultimediaCodecs3 ;;
+esac
+}
+Continuar(){
+	clear
+	echo -e '\n Instalando pacote...'
+	read -t 5
+sudo apt-get -y install isomaster furiusisomount
+	clear
+	echo -e '\n Instalacao concluida.'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+	MultimediaCodecs4
+}
+Pular(){
+	clear
+	echo -e '\n Pulando para o proximo aplicativo...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	MultimediaCodecs4
+}
+MultimediaCodecs3
+
+MultimediaCodecs4(){
+	clear
+	echo -e '\n Instalando pacotes para DVD/VCD/VIDEOS e Som.\n'
+	echo -e '\b soundconverter. Conversor grafico de som'
+	echo -e '\b ogmrip. Utilitario extractor (ripper) de DVD.'
+	echo -e '\b avidemux. Editor de vídeo versao GTK'
+	echo -e '\b mediainfo. Utilitario em linha de comando para obter informacoes de \n arquivos de audio/video'
+	echo -e '\b mediainfo-gui. Utilitario grafico para obter informacoes de arquivos \n de audio/video'
+	echo -e '\b vlc. Leitor multimédia e streamer para varias fontes de rede'
+	echo -e '\b fluidsynth. (Qsynth), um sintetizador midi em tempo real com base em \n SoundFont2'
+	echo -e '\b youtube-dl. Utilitario em linha de comando para baixar videos do youtube e outros sites'
+	echo -e '\b youtube-dlg. Utilitario em GUI front-end do popular youtube-dl escrito em wxPython\n\n'
+	echo -e '\b Deseja continuar ou pular?'
+	echo -e '\b Digite (C) para continuar.'
+	echo -e '\b Digite (P) para pular.'
+read opcao
+case $opcao in
+	C|c) Continuar ;;
+	P|p) Pular ;;
+	*) "Opcao invalida" ; echo  ; MultimediaCodecs4 ;;
+esac
+}
+Continuar(){
+	clear
+	echo -e '\n Instalando pacote...'
+	read -t 5
+sudo apt-get -y install soundconverter ogmrip avidemux mediainfo mediainfo-gui vlc vlc-data vlc-dbg vlc-plugin-fluidsynth vlc-plugin-jack vlc-plugin-notify vlc-plugin-pulse vlc-plugin-sdl vlc-plugin-svg vlc-plugin-zvbi browser-plugin-vlc vlc-plugin-vlsub youtube-dl youtube-dlg
+read -t 2
+sudo sed -i "s/totem/vlc/g" /etc/gnome/defaults.list
+	clear
+	echo -e '\n Instalacao concluida.'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+if [ -e /etc/skel/.local/share/vlc/skins2/.xubskin ]
+			then
+MultimediaCodecs5
+
+			else
+
+	SkinVLC
+SkinVLC(){
+	clear
+	echo -e '\n O VLC contem um pacote de skins de 30 MB.\n\b Deseja instala-lo???\n\n\b Digite (S) para Concordar e instalar.\n\b Digite (N) para Nao instalar.'
+read opcao
+case $opcao in
+	S) SkinVLC01 ;;
+	N) NaoSkin ;;
+	*) "Opcao invalida" ; echo  ; MultimediaCodecs4 ;;
+esac
+}
+SkinVLC01(){
+	clear
+####Skins do VLC
+#if (ls ls /usr/bin |grep -i "unzip")
+if [ -e /usr/bin/unzip ]
+		then
+	echo -e 'Baixando e instalando os Skins do VLC...'
+mkdir -p ~/.local/share/vlc/skins2 && cd ~/.local/share/vlc/skins2
+sudo mkdir -p /etc/skel/.local/share/vlc/skins2
+wget -c -O vlc-skins.zip http://drive.noobslab.com/data/apps/vlc-skins/vlc-skins.zip
+unzip vlc-skins.zip
+sudo cp -rf ~/.local/share/vlc/skins2/* /etc/skel/.local/share/vlc/skins2
+sudo touch /etc/skel/.local/share/vlc/skins2/.xubskin
+sudo chmod -R 644 /etc/skel/.local
+	echo -e 'Instalacao dos Skins do VLC completa...'
+	echo -e 'Para usar o Skin, abra o VLC e acesse "Ferramentas > Preferencias".\n\b Clique em "Usar capa personalizada > Procurar".\n\b Aperte "CTRL+H" para aparecer os arquivos/pastas ocultos.\n\b Va em "~/.local/share/vlc/skins2" e escolha o Skin de preferencia.'
+	read -t 5
+#	Pular
+	MultimediaCodecs5
+
+	else
+	echo -e '\b O sistema nao possui o unzip instalado,\n\b Instale-o e depois volte aqui para instalar o Skin do VLC, se desejar...'
+	read -t 5
+#	pular
+	MultimediaCodecs5
+
+fi
+
+}
+NaoSkin(){
+echo -e 'Voce optou por nao instalar os Skins do VLC.\n\b Pulando para o proximo aplicativo...\n\b Espere 30 segundos ou aperte "Enter".'
+read -t 30
+MultimediaCodecs5
+}
+SkinVLC
+fi
+}
+
+
+Pular(){
+	clear
+	echo -e '\n Pulando para o proximo aplicativo...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	MultimediaCodecs5
+}
+MultimediaCodecs4
+
+MultimediaCodecs5(){
+	clear
+	echo -e '\n Instalando pacotes para suporte a compactadores-descompactadores.\n'
+	echo -e '\b arj. Versao de codigo fonte aberto do arquivador arj.'
+	echo -e '\b lha. Um arquivador lzh especialmente para conversoes fido <-> Rfc.'
+	echo -e '\b p7zip. Compactador de arquivos 7z com alta taxa de compressao.'
+	echo -e '\b p7zip-full. Compactador de arquivos 7z/7za com alta taxa de compressao \n e suporte a varios formatos de arquivos.'
+	echo -e '\b p7zip-rar. Modulo rar non-free para p7zip.'
+	echo -e '\b rar. Compactador de arquivos rar.'
+	echo -e '\b unrar. Descompactador de arquivos rar.'
+	echo -e '\b unace-nonfree. Pacote para extrair, testar e ver arquivos .ace (V. non-free).\n\n'
+	echo -e '\b Deseja continuar ou pular?'
+	echo -e '\b Digite (C) para continuar.'
+	echo -e '\b Digite (P) para pular.'
+read opcao
+case $opcao in
+	C|c) Continuar ;;
+	P|p) Pular ;;
+	*) "Opcao invalida" ; echo  ; MultimediaCodecs5 ;;
+esac
+}
+Continuar(){
+	clear
+	echo -e '\n Instalando pacote...'
+	read -t 5
+if (lsb_release -cs | grep -i trusty)
+		then
+sudo apt-get -y -f install lhasa arj p7zip p7zip-full p7zip-rar unrar unrar-free rar unace
+	else
+if (lsb_release -cs | grep -i precise)
+		then
+sudo apt-get -y install arj lha p7zip p7zip-full p7zip-rar rar unrar unace-nonfree
+	else
+sudo apt-get -y -f install lhasa arj p7zip p7zip-full p7zip-rar unrar unrar-free rar unace
+sudo apt-get -y -f install arj lha p7zip p7zip-full p7zip-rar rar unrar unace-nonfree
+fi
+fi
+	clear
+	echo -e '\n Instalacao concluida.'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+	MultimediaCodecs6
+}
+Pular(){
+	clear
+	echo -e '\n Pulando para o proximo aplicativo...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	MultimediaCodecs6
+}
+MultimediaCodecs5
+
+MultimediaCodecs6(){
+	clear
+	echo -e '\n Instalando pacote chromium-browser + pepperflashplugin-nonfree.\n'
+	echo -e '\n Chromium é um projeto de navegador de código fonte aberto \n Serve como base para o Google Chrome, que é o Chromium com uma marca \n diferente (nome e logo) com poucas adições tais como uso de rastreamento \n e um sistema de autoatualização. \n Por ser um pacote livre, trabalha melhor com aplicativos abertos como \n "Open Java" e melhor compatibilidade com "Oracle Java".\n\n'
+	echo -e '\n pepperflashplugin-nonfree é um Flash Plugin compatível com o Google Chrome/Chromium'
+	echo -e '\b Deseja continuar e instalar o Chromium, ir para o Chrome ou pular?'
+	echo -e '\b Digite (C) para continuar e instalar o Chromium.'
+	echo -e '\b Digite (G) para ir ao Google Chrome.'
+	echo -e '\b Digite (P) para pular.'
+read opcao
+case $opcao in
+	C) chromiumbrowser ;;
+	G) GoogleChrome ;;
+	P) Pular ;;
+	*) "Opcao invalida" ; echo  ; MultimediaCodecs6 ;;
+esac
+}
+chromiumbrowser(){
+	clear
+	echo -e '\n Instalando pacote...'
+	read -t 5
+sudo apt-get -y install chromium-browser
+sudo apt-get -y install pepperflashplugin-nonfree
+	clear
+	echo -e '\nInstalacao concluida.'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+	MultimediaCodecs7
+}
+GoogleChrome(){
+	clear
+	echo -e '\n Instalando pacote Google Chrome + pepperflashplugin-nonfree.\n'
+	echo -e '\n O Chrome e o um navegador desenvolvido pelo Google. \n Compilado com base em componentes de codigo aberto como o motor \n de renderizacao, o WebKit da Apple Inc. e sua estrutura de desenvolvimento \n de aplicacoes (Framework).\n\n'
+	echo -e '\n pepperflashplugin-nonfree é um Flash Plugin compatível com o Google Chrome/Chromium'
+	echo -e '\b Deseja continuar e instalar o Google Chrome, ou pular?'
+	echo -e '\b Digite (C) para continuar e instalar o Google Chrome.'
+	echo -e '\b Digite (P) para pular.'
+read opcao
+case $opcao in
+	C|c) Continuar ;;
+	P|p) Pular ;;
+	*) "Opcao invalida" ; echo  ; GoogleChrome ;;
+esac
+}
+Continuar(){
+	clear
+	echo -e '\n Instalando pacote...'
+	read -t 5
+sudo apt-get -y install libxss1 libudev0 google-chrome-stable
+sudo apt-get -y install pepperflashplugin-nonfree
+	echo -e '\n Instalacao concluida.'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+	MultimediaCodecs7
+}
+Pular(){
+	clear
+	echo -e '\n Pulando para o proximo aplicativo...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	MultimediaCodecs7
+}
+Pular(){
+	clear
+	echo -e '\n Pulando para o proximo aplicativo...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	MultimediaCodecs7
+}
+MultimediaCodecs6
+
+MultimediaCodecs7(){
+	clear
+	echo -e '\n Instalando pacote Open Java Development Kit.'
+	echo -e '\n OpenJDK e um ambiente de desenvolvimento para construir aplicacoes, applets, \n e componentes usando a linguagem de programacao Java. \n Os pacotes são construidos usando o suporte e patches do projeto IcedTea. \n IcedTea e um plugin para navegador web para executar applets Java, com suporte \n a LiveConnect/JavaScript. \n Destina-se para xulrunner-1.9 e navegadores compatíveis que suportem o NPAPI. \n Para quem usa o Java em casos especiais, por exemplo, acessar o site \n Banco do Brasil, e recomendavel instalar o Oracle Java. \n Teste o Java no site oficial: http://www.java.com/pt_BR/download/testjava.jsp\n\n'
+	echo -e '\b Deseja continuar e instalar o Open Java, ir para Oracle Java ou pular para \n proxima etapa?\n'
+	echo -e '\b Digite (C) para continuar e instalar o Open Java.'
+	echo -e '\b Digite (O) para ir ao Oracle Java.'
+	echo -e '\b Digite (P) para pular.'
+
+read opcao
+case $opcao in
+	C) OpenJavaDevelopmentKit ;;
+	O) OracleJava ;;
+	P) Pular ;;
+	*) "Opcao invalida" ; echo  ; MultimediaCodecs7 ;;
+esac
+}
+OpenJavaDevelopmentKit(){
+	clear
+	echo -e '\n Instalando pacote...'
+	read -t 5
+sudo apt-get -y install aria2 openjdk-7-jdk icedtea-7-plugin icedtea-plugin default-jre-headless default-jre
+if (update-java-alternatives -l |cut -d "/" -f "5" |grep 1.7 |grep openjdk)
+	then
+cd /usr/lib/jvm/
+sudo rm -rf /usr/lib/jvm/default-java
+sudo ln -sf "$(update-java-alternatives -l |cut -d "/" -f "5" |grep 1.7)" '/usr/lib/jvm/default-java'
+cd -
+update-java-alternatives -s $(update-java-alternatives -l |cut -d "/" -f "5" |grep 1.7)
+	else
+		clear
+		echo -e '\n Open Java Development Kit 1.7 nao esta instalado'
+fi
+	clear
+	echo -e '\n Instalacao concluida.'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+	$XUBAPPOPT
+}
+OracleJava(){
+	clear
+	echo -e '\n Instalando pacote Oracle Java(TM) Development Kit (JDK) 7. \n\n Oracke JDK (TM) e um ambiente de desenvolvimento para a construcao e \n execucao de aplicacoes, applets, e componentes usando a linguagem de \n programação Java. Inclui o Java Runtime Environment (JRE) para executar \n aplicacoes, Java Plug-in para a execucao de applets em navegadores \n web e ferramentas uteis para o desenvolvimento e teste de programas \n escritos na linguagem de programacao Java. Recomendavel para casos \n especiais como usar aplicacoes Java em codigo fechado. \n\n (PS.1).: Qualquer confirmacao grafica tipo X11 que aparecer, confirme. \n\n (PS.2).: Apos a instalacao, aparecera um menu de configuracao. Escolha a \n opcao em que aparece "java-7-oracle". \n Talvez ira ser a opcao nº 3 ou 4. \n Teste o Java no site oficial: http://www.java.com/pt_BR/download/testjava.jsp \n\n'
+	echo -e '\b Deseja continuar e instalar o Oracle Java, ou pular para a proxima etapa?'
+	echo -e '\b Digite (C) para continuar e instalar o Oracle Java.'
+	echo -e '\b Digite (O) para terminar esta etapa e ir para "Aplicativos Opcionais".'
+	echo -e '\b Digite (Q) para terminar e sair da configuracao.'
+read opcao
+case $opcao in
+	C) OracleJavaJDK ;;
+	O) Pular ;;
+	Q) Sair ;;
+	*) "Opcao invalida" ; echo  ; OracleJava ;;
+esac
+}
+OracleJavaJDK(){
+	clear
+	echo -e '\n Instalando pacote...'
+	read -t 5
+
+### Instalação automatizada (auto aceitar licença)
+sudo sh -c 'echo "oracle-java8-installer" shared/accepted-oracle-license-v1-1 select true' | sudo /usr/bin/debconf-set-selections
+
+# Instalando o Oracle Java 8 (JDK8 e JRE8)
+sudo apt-get -y -f install oracle-java8-installer
+
+# Alternando para o Oracle Java 8
+sudo update-java-alternatives -s java-8-oracle
+
+# Definindo as variáveis ​​de ambiente Java
+sudo apt-get -y -f install oracle-java8-set-default
+
+	clear
+	echo -e '\n Instalacao concluida.'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+	$XUBAPPOPT
+}
+Pular(){
+	clear
+	echo -e '\n Pulando para o proximo aplicativo...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	$XUBAPPOPT
+}
+Pular(){
+	clear
+	echo -e '\n Pulando para o proximo aplicativo...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	$XUBAPPOPT
+}
+MultimediaCodecs7
+}
+###Continuar MultimediaCodecs FIM
+MultimediaCodecsINI
+###MultimediaCodecs Fim
+
+		else
+	echo -e 'Servico xubapp indisponivel!'
+fi

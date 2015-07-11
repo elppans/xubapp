@@ -1,0 +1,436 @@
+#!/bin/bash
+
+XUBAPPINIT=/usr/share/xubapp/xubapp
+XUBAPPAVS=/usr/share/xubapp/xubapp-avs
+XUBAPPPNC=/usr/share/xubapp/xubapp.sh
+XUBAPPADG=/usr/share/xubapp/xubapp-addrepgpg
+XUBAPPCP=/usr/share/xubapp/xubapp-compilacoes
+XUBAPPMT=/usr/share/xubapp/xubapp-multimedia
+XUBAPPOPT=/usr/share/xubapp/xubapp-opcional
+XUBAPPUPG=/usr/share/xubapp/xubapp-upgrade
+CXUBAG=/var/cache/xubapp-ag
+CXUBUPG=/var/cache/xubapp-upg
+CXUBCM=/var/cache/xubapp-cm
+CXUBMC=/var/cache/xubapp-mc
+CXUBOP=/var/cache/xubapp-op
+CREPGPG=/var/cache/addgpg
+
+if [ -e $XUBAPPINIT ]
+		then
+###Compilacoes Principal Inicio
+CompilacaoINI(){
+if [ -e $CREPGPG ]
+			then
+	clear
+	echo -e '\n Iniciando etapa compiladores e manutencao...\n'
+	echo -e '\b Nesta etapa irei perguntar se deseja instalar o aplicativo ou nao.'
+	echo -e '\b E irei configurar automaticamente de acordo com suas escolhas.\n\n'
+	echo -e '\b Deseja continuar ou Sair?'
+	echo -e '\b Digite (C) para continuar.'
+	echo -e '\b Digite (Q) para sair.'
+read opcao
+case $opcao in
+	C|c) Continuar ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo  ; CompilacaoINI ;;
+esac
+			else
+clear
+echo -e "Nao ha como executar esta acao!"
+echo -e "Voltando ao menu principal..."
+read -t 30
+$XUBAPPPNC
+fi
+}
+Sair(){
+	clear
+	echo -e '\n Saindo da configuracao...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	exit 0
+}
+###Inicio Continuar Compilacao
+Continuar(){
+	clear
+	echo -e '\n Continuando com a configuracao...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	compilacoes1
+###unity-lens-shopping FIM
+
+
+
+###Inicio Compilacoes 1
+compilacoes1(){
+if [ -e $CREPGPG ]
+			then
+	clear
+	echo -e '\n Instalar pacotes necessarios para compilacoes...\n'
+	echo -e '\b subversion'
+	echo -e '\b aptitude' 
+	echo -e '\b tasksel'
+	echo -e '\b debtags'
+	echo -e '\b auto-apt'
+	echo -e '\b build-essential' 
+	echo -e '\b kernel-package' 
+	echo -e '\b checkinstall' 
+	echo -e '\b deborphan\n\n'
+	echo -e 'Deseja continuar ou pular?'
+	echo -e 'Digite (C) para continuar.'
+	echo -e 'Digite (P) para pular.'
+read opcao
+case $opcao in
+	C|c) Continuar ;;
+	P|p) Pular ;;
+	*) "Opcao invalida" ; echo  ; compilacoes1 ;;
+esac
+			else
+clear
+echo -e "Nao ha como executar esta acao!"
+echo -e "Voltando ao menu principal..."
+read -t 30
+addgpg
+fi
+}
+Continuar(){
+	clear
+	echo -e '\n Instalando pacotes...'
+	read -t 5
+sudo apt-get -y install subversion aptitude tasksel debtags libcwidget-dev tagcoll auto-apt build-essential kernel-package libncurses5-dev checkinstall deborphan
+sudo sed -i "s/print-installation-architecture/print-architecture/g" /usr/bin/auto-apt
+sudo sh -c 'cat > /usr/bin/auto-apt-update' <<EOF
+#!/bin/sh
+auto-apt update-local
+auto-apt update
+auto-apt updatedb
+EOF
+sudo chmod +x /usr/bin/auto-apt-update
+# libgtk2.0-dev libperl-dev = Corrige dependencias ao compilar: "no package 'gtk+-2.0' found"
+# libsdl1.2-dev = Corrige erro: "sdl-config not found"
+	clear
+echo -e '\n Instalacao concluida...\n'
+	read -t 5
+echo -e '\b Para atualizar o banco de dados do auto-apt com facilidade, faca o comando auto-apt-update.'
+echo -e '\b Sempre que for compilar qualquer programa, atualizar o banco de dados, consulte o man para usar'
+echo -e '\b Ao compilar qualquer pacote, ha a opcao de empacotar com o checkinstall, saiba mais com o man\n\n'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+}
+Pular(){
+	clear
+	echo -e '\n Pulando para o proximo aplicativo...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	compilacoes2
+}
+compilacoes1
+
+###Fim Compilacoes 1
+
+### Inicio Compilacoes 2
+compilacoes2(){
+if [ -e $CREPGPG ]
+			then
+	clear
+	echo -e '\n Instalando programa grafico para configuracao do servidor samba...\n'
+	echo -e '\b Gadmin-Samba. Programa grafico'
+	echo -e '\b Samba. Programa modo x \n\n'
+	echo -e '\b Deseja continuar ou pular?'
+	echo -e '\b Digite (C) para continuar.'
+	echo -e '\b Digite (P) para pular.'
+read opcao
+case $opcao in
+	C|c) Continuar ;;
+	P|p) Pular ;;
+	*) "Opcao invalida" ; echo  ; compilacoes2 ;;
+esac
+			else
+clear
+echo -e "Nao ha como executar esta acao!"
+echo -e "Voltando ao menu principal..."
+read -t 30
+addgpg
+fi
+}
+Continuar(){
+	clear
+	echo -e '\n Instalando pacotes...'
+	read -t 5
+sudo cp -rf /etc/samba/smb.conf /etc/samba/smb.conf.old
+sudo apt-get -y install gadmin-samba libpam-smbpass
+sudo chmod -R 755 /dev/shm
+clear
+echo -e '\n Instalacao concluida, para configurar o servidor samba use o programa gadmin-samba'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+}
+Pular(){
+	clear
+	echo -e '\n Pulando para o proximo aplicativo...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	compilacoes3
+}
+compilacoes2
+###Fim Compilacoes 2
+
+###Inicio Compilacoes 3
+compilacoes3(){
+if [ -e $CREPGPG ]
+			then
+	clear
+	echo -e '\n Instalando pacotes em linha de comando para verificacao de IPs...\n'
+	echo -e '\b Curl. Verifica qual e o seu IP Externo com o comando "curl ifconfig-me".'
+	echo -e '\b Nmap. verifica IPs conectados na rede(Consulte o man).\n\n'
+	echo -e '\b Deseja continuar ou pular?'
+	echo -e '\b Digite (C) para continuar.'
+	echo -e '\b Digite (P) para pular.'
+read opcao
+case $opcao in
+	C|c) Continuar ;;
+	P|p) Pular ;;
+	*) "Opcao invalida" ; echo  ; compilacoes3 ;;
+esac
+			else
+clear
+echo -e "Nao ha como executar esta acao!"
+echo -e "Voltando ao menu principal..."
+read -t 30
+addgpg
+fi
+}
+Continuar(){
+	clear
+	echo -e '\n Instalando pacotes...'
+	read -t 5
+sudo apt-get -y install curl nmap
+	clear
+echo -e '\n Instalacao concluida'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+}
+Pular(){
+	clear
+	echo -e '\n Pulando para o proximo aplicativo...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	compilacoes4
+}
+compilacoes3
+###Fim Compilacoes 3
+
+###Inicio Compilacoes 4
+compilacoes4(){
+if [ -e $CREPGPG ]
+			then
+	clear
+	echo -e '\n Instalando pacote para otimizar a memoria...\n'
+	echo -e '\b zram-config.\n\n'
+	echo -e '\b Deseja continuar ou pular?'
+	echo -e '\b Digite (C) para continuar.'
+	echo -e '\b Digite (P) para pular.'
+read opcao
+case $opcao in
+	C|c) Continuar ;;
+	P|p) Pular ;;
+	*) "Opcao invalida" ; echo  ; compilacoes4 ;;
+esac
+			else
+clear
+echo -e "Nao ha como executar esta acao!"
+echo -e "Voltando ao menu principal..."
+read -t 30
+addgpg
+fi
+}
+Continuar(){
+	clear
+	echo -e '\n Instalando pacote...'
+	read -t 5
+sudo apt-get -y install zram-config
+	clear
+echo -e '\n Instalacao concluida'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+}
+Pular(){
+	clear
+	echo -e '\n Pulando para o proximo aplicativo...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	compilacoes5
+}
+compilacoes4
+###Fim Compilacoes 4
+
+###Inicio Compilacoes 5
+compilacoes5(){
+if [ -e $CREPGPG ]
+			then
+	clear
+	echo -e '\n Instalando prelink...\n'
+	echo -e '\b Prelink. constroi pontes de acesso rapido entre os programas e as bibliotecas melhorando a performance do sistema.\n\n'
+	echo -e '\b Deseja continuar ou pular?'
+	echo -e '\b Digite (C) para continuar.'
+	echo -e '\b Digite (P) para pular.'
+read opcao
+case $opcao in
+	C|c) Continuar ;;
+	P|p) Pular ;;
+	*) "Opcao invalida" ; echo  ; compilacoes5 ;;
+esac
+			else
+clear
+echo -e "Nao ha como executar esta acao!"
+echo -e "Voltando ao menu principal..."
+read -t 30
+addgpg
+fi
+}
+Continuar(){
+	clear
+	echo -e '\n Instalando pacote...'
+	read -t 5
+sudo apt-get -y install prelink
+sudo sed -i "s/PRELINKING=unknown/PRELINKING=yes/g" /etc/default/prelink
+sudo sh -c 'cat > /etc/apt/apt.conf' <<EOF
+#"DPkg::Post-Invoke {"echo Running prelink, please wait...;/etc/cron.daily/prelink";}"
+DPkg::Post-Invoke {"echo Carregando prelink, por favor espere...;/etc/cron.daily/prelink";}
+EOF
+read -t 5
+clear
+echo -e '\n Prelink instalado\n'
+read -t 5
+echo -e '\b Executando processo do comando prelink para a primeira avaliacao do seu sistema...'
+echo -e '\b Apos a primeira avaliacao, as proximas avaliacoes automaticas sao rapidas'
+echo -e '\b Se algum pacote que for instalado posteriormente der erro de nucleo'
+echo -e '\b Adicione o endereco do comando do pacote com a opcao -b na frente no arquivo /etc/prelink.conf'
+echo -e '\b Em seguida reinstale o pacote e veja se funciona\n\n'
+read -t 5
+echo -e '\b Carregando prelink, por favor espere...\n'
+/etc/cron.daily/prelink
+	clear
+echo -e '\n Instalacao concluida'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+}
+Pular(){
+	clear
+	echo -e '\n Pulando para o proximo aplicativo...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	compilacoes6
+}
+compilacoes5
+###Fim Compilacoes 5
+
+###Inicio Compilacoes 6
+compilacoes6(){
+if [ -e $CREPGPG ]
+			then
+	clear
+	echo -e '\n Instalacao do Mesa-utils...\n'
+	echo -e '\b Mesa-utils. Utilitário Mesa GL diversos'
+	echo -e '\b Este pacote contem varios utilitarios GL basicos construidos pela Mesa. \n Incluindo glxinfo e glxgears.'
+	echo -e '\b E atraves dele que a opcao Detalhes nas informacoes do sistema aparece \n sobre a informacao de video\n\n'
+	echo -e '\b Deseja continuar ou pular?'
+	echo -e '\b Digite (C) para continuar.'
+	echo -e '\b Digite (P) para pular.'
+read opcao
+case $opcao in
+	C|c) Continuar ;;
+	P|p) Pular ;;
+	*) "Opcao invalida" ; echo  ; compilacoes6 ;;
+esac
+			else
+clear
+echo -e "Nao ha como executar esta acao!"
+echo -e "Voltando ao menu principal..."
+read -t 30
+addgpg
+fi
+}
+Continuar(){
+	clear
+	echo -e '\n Instalando pacote...'
+	read -t 5
+sudo apt-get -y install mesa-utils
+	clear
+	echo -e '\n Instalacao concluida.'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+}
+Pular(){
+	clear
+	echo -e '\n Pulando para o proximo aplicativo...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	compilacoes7
+}
+compilacoes6
+###Fim Compilacoes 6
+
+##inicio Compilacoes 7
+compilacoes7(){
+if [ -e $CREPGPG ]
+			then
+	clear
+	echo -e '\n Instalacao de gerador de boot...\n '
+	echo -e '\b Unetbootin. Configurador Linux/BSD para Particoes ou USB drive.'
+	echo -e '\b Multisystem. Criador de Live USB Multiplos.'
+	echo -e '\b Para fazer qualquer boot de outras distros e ate o proprio Ubuntu usb, \n use Unetbooting clicando no menu sistema'
+	echo -e '\b Para fazer boot multiplo de varias distros em usb, use Multisystem \n clicando no menu sistema.\n\n'
+	echo -e '\b Deseja continuar ou pular?'
+	echo -e '\b Digite (C) para continuar.'
+	echo -e '\b Digite (M) para terminar esta etapa e ir para Multimedia/Codecs.'
+read opcao
+case $opcao in
+	C|c) Continuar ;;
+	M|m) Pular ;;
+	*) "Opcao invalida" ; echo  ; compilacoes7 ;;
+esac
+			else
+clear
+echo -e "Nao ha como executar esta acao!"
+echo -e "Voltando ao menu principal..."
+read -t 30
+addgpg
+fi
+}
+Continuar(){
+	clear
+	echo -e '\n Instalando pacote...\n'
+	read -t 5
+sudo apt-get -y install unetbootin multisystem
+	clear
+	echo -e '\n Instalacao e configuracao da etapa "Compilacao e Manutencao"  concluida.'
+	echo -e '\b Avancando para a etapa Multimedia/Codecs'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+	$XUBAPPMT
+}
+Pular(){
+	clear
+	echo -e '\n Pulando para o proximo aplicativo...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+	$XUBAPPMT
+}
+compilacoes7
+###Fim Compilacoes 7
+###Fim Continuar Compilacao
+}
+CompilacaoINI
+###Compilacoes Principal Fim
+
+		else
+	echo -e 'Servico xubapp indisponivel!'
+fi

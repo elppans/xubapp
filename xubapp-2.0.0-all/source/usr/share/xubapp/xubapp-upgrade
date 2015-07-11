@@ -1,0 +1,107 @@
+#!/bin/bash
+
+XUBAPPINIT=/usr/share/xubapp/xubapp
+XUBAPPPNC=/usr/share/xubapp/xubapp.sh
+XUBAPPCP=/usr/share/xubapp/xubapp-compilacoes
+CXUBUPG=/var/cache/xubapp-upg
+CREPGPG=/var/cache/addgpg
+
+if [ -e $XUBAPPINIT ]
+		then
+###Inicio Upgrade
+##Upgrade(){
+if [ -e $CXUBUPG ]
+			then
+#	clear
+#	echo -e '\n Apenas fazer um upgrade...'
+#	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+#	read -t 30
+#Prevenir erro "BADSIG ID"
+#Inicio
+sudo -i apt-get -y clean
+sudo -i apt-get -y autoclean
+cd /var/lib/apt
+
+#list.old	
+##if (ls /var/lib/apt | grep -i lists.old)
+if [ -e /var/lib/apt/lists.old ]
+			then
+		sudo -i rm -rf /var/lib/apt/lists.old
+#list1
+##	if (ls /var/lib/apt | grep -i lists)
+	if [ -e /var/lib/apt/lists ]
+			then
+		sudo -i mv /var/lib/apt/lists /var/lib/apt/lists.old
+		sudo -i mkdir -p  /var/lib/apt/lists/partial
+		sudo -i apt-get -y clean
+		sudo -i apt-get -y autoclean
+		sudo -i apt-get -f -y autoremove
+		sudo -i apt-get -y update
+		sudo -i apt-get -f -y dist-upgrade
+			else
+		sudo -i mkdir -p  /var/lib/apt/lists/partial
+		sudo -i apt-get -y clean
+		sudo -i apt-get -y autoclean
+		sudo -i apt-get -f -y autoremove
+		sudo -i apt-get -y update
+		sudo -i apt-get -f -y dist-upgrade
+	fi
+#list1fim
+			else
+#list2
+##	if (ls /var/lib/apt | grep -i lists)
+	if [ -e /var/lib/apt/lists ]
+			then
+		sudo -i mv /var/lib/apt/lists /var/lib/apt/lists.old
+		sudo -i mkdir -p  /var/lib/apt/lists/partial
+		sudo -i apt-get -y clean
+		sudo -i apt-get -y autoclean
+		sudo -i apt-get -f -y autoremove
+		sudo -i apt-get -y update
+		sudo -i apt-get -f -y dist-upgrade
+			else
+		sudo -i mkdir -p  /var/lib/apt/lists/partial
+		sudo -i apt-get -y clean
+		sudo -i apt-get -y autoclean
+		sudo -i apt-get -f -y autoremove
+		sudo -i apt-get -y update
+		sudo -i apt-get -f -y dist-upgrade
+	fi
+#listfim2
+fi
+#list.oldfim
+
+cd -
+
+#sudo -i apt-get -y clean
+#sudo -i apt-get -y autoclean
+#sudo -i apt-get -y update
+#Fim
+#Fim "BADSIG ID"
+#	sudo apt-get -y dist-upgrade
+	clear
+if ( cat $CXUBUPG | grep "xubapp-upgrade-menu-off" | sed -n 1p )
+			then
+	read -t 3
+	exit 0
+
+else
+	echo -e '\n Upgrade terminado.'
+	echo -e '\b Indo para a proxima etapa'
+	echo -e '\b Aguarde 30 Segundos ou aperte "Enter".'
+read -t 30
+	$XUBAPPCP
+fi
+			else
+clear
+echo -e "Nao ha como executar esta acao!"
+echo -e "Voltando ao menu principal..."
+read -t 30
+$XUBAPPPNC
+fi
+##}
+###Fim Upgrade
+
+		else
+	echo -e 'Servico xubapp indisponivel!'
+fi

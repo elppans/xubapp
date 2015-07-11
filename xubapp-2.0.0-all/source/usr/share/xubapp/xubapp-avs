@@ -1,0 +1,64 @@
+#!/bin/bash
+
+XUBAPPINIT=/usr/share/xubapp/xubapp
+XUBAPPAVS=/usr/share/xubapp/xubapp-avs
+XUBAPPPNC=/usr/share/xubapp/xubapp.sh
+CREPGPG=/var/cache/addgpg
+
+if [ -e $XUBAPPINIT ]
+		then
+Aviso (){
+	clear
+	echo -e '\n Este e um script de instalacao/configuracao para Ubuntu \n'
+	echo -e '\b Sera adicionado alguns GPGs e Repositorios no Ubuntu,'
+	echo -e '\b Apos a adicao, ira ser feito um upgrade no sistema para nao haver falhas'
+	echo -e '\b Na instalacao de pacotes importantes.'
+	echo -e '\b E necessario habilitar manualmente todos os repositorios via \n "Canais de Software" na "Central de programas".\n'
+	echo -e '\b Apos isto sera feito instalacoes por secao.\n\n'
+	echo -e '\b Tudo o que vou fazer de agora em diante sera por etapa.'
+	echo -e '\b Sao 3 etapas. Passando primeiro pela "Compilacao e Manutencao";'
+	echo -e '\b A segunda etapa é sobre "Multimedia e Codecs";'
+	echo -e '\b E finalmente a terceira e ultima etapa, que e sobre "Itens Opcionais"'
+	echo -e '\b Voce pode escolher entre usar a opcao de preferencia, pular ou sair.'
+	echo -e '\b Lembre-se de que, qualquer decisao e de sua propria conta e risco.\n\n'
+	echo -e '\b Para escolher, aperte a letra em que esta entre parenteses \n E aperte "Enter".\n\n'
+	echo -e '\b Deseja continuar ou Sair?'
+	echo -e '\b Digite (C) para continuar.'
+	echo -e '\b Digite (Q) para sair.'
+read opcao
+case $opcao in
+	C|c)
+		sudo sh -c 'echo -e ""' > $CREPGPG
+		Continuar ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo ; Aviso ;;
+esac
+}
+Continuar (){
+		if [ -e $XUBAPPPNC ]
+				then
+	clear
+	echo -e '\n Continuando com a configuracao...'
+	read -t 10
+	clear
+	$XUBAPPPNC
+	clear
+			else
+	echo -e 'Nao foi possivel acessar o menu principal!'
+	echo -e 'Saindo do configurador...'
+	read -t 5
+	exit 0
+fi
+}
+Sair (){
+	clear
+	echo -e '\n Saindo da configuracao...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	exit 0
+}
+Aviso
+
+		else
+	echo -e 'Servico xubapp indisponivel!'
+fi

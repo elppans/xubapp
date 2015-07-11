@@ -1,0 +1,520 @@
+#!/bin/bash
+
+XUBAPPINIT=/usr/share/xubapp/xubapp
+XUBAPPAVS=/usr/share/xubapp/xubapp-avs
+XUBAPPPNC=/usr/share/xubapp/xubapp.sh
+XUBAPPADG=/usr/share/xubapp/xubapp-addrepgpg
+XUBAPPCP=/usr/share/xubapp/xubapp-compilacoes
+XUBAPPMT=/usr/share/xubapp/xubapp-multimedia
+XUBAPPOPT=/usr/share/xubapp/xubapp-opcional
+XUBAPPUPG=/usr/share/xubapp/xubapp-upgrade
+CXUBAG=/var/cache/xubapp-ag
+CXUBUPG=/var/cache/xubapp-upg
+CXUBCM=/var/cache/xubapp-cm
+CXUBMC=/var/cache/xubapp-mc
+CXUBOP=/var/cache/xubapp-op
+CREPGPG=/var/cache/addgpg
+
+if [ -e $XUBAPPINIT ]
+		then
+Opcional1(){
+if [ -e $CXUBOP ]
+			then
+if (lsb_release -cs | grep -i lucid)
+		then
+	clear
+	echo -e '\n Iniciando etapa Aplicativos Opcionais...\n'
+	echo -e '\b Nesta etapa irei perguntar se deseja instalar o aplicativo opcional ou nao.'
+	echo -e '\b E irei configurar automaticamente de acordo com suas escolhas.\n\n'
+	echo -e '\b Nesta etapa sao 5 aplicativos, deles, podera escolher:\n\n'
+	echo -e '\b Digite (V) para instalacao e configuracao do Virtual Box.'
+	echo -e '\b Digite (F) para instalacao e configuracao do Flash Current'
+	echo -e '\b Digite (R) para instalacao e configuracao de Remasterizador.'
+	echo -e '\b Digite (C) para desativar Usuario "Convidado", se houver.'
+	echo -e '\b Digite (P) para desativar Usuario "Remoto", se houver.'
+	echo -e '\b Digite (K) para adicionar Removedor de Kernels antigos.\n\n'
+	echo -e '\b Digite (Q) para terminar esta etapa e sair da configuracao.'
+	else
+if (lsb_release -cs | grep -i precise)
+		then
+	clear
+	echo -e '\n Iniciando etapa Aplicativos Opcionais...\n'
+	echo -e '\b Nesta etapa irei perguntar se deseja instalar o aplicativo opcional ou nao.'
+	echo -e '\b E irei configurar automaticamente de acordo com suas escolhas.\n\n'
+	echo -e '\b Nesta etapa sao 5 aplicativos, deles, podera escolher:\n\n'
+	echo -e '\b Digite (V) para instalacao e configuracao do Virtual Box.'
+	echo -e '\b Digite (F) para instalacao e configuracao do Flash Current'
+	echo -e '\b Digite (R) para instalacao e configuracao de Remasterizador.'
+	echo -e '\b Digite (C) para desativar Usuario "Convidado", se houver.'
+	echo -e '\b Digite (P) para desativar Usuario "Remoto", se houver.'
+	echo -e '\b Digite (K) para adicionar Removedor de Kernels antigos.\n\n'
+	echo -e '\b Digite (Q) para terminar esta etapa e sair da configuracao.'
+	else
+if (lsb_release -cs | grep -i trusty)
+		then
+	clear
+	echo -e '\n Iniciando etapa Aplicativos Opcionais...\n'
+	echo -e '\b Nesta etapa irei perguntar se deseja instalar o aplicativo opcional ou nao.'
+	echo -e '\b E irei configurar automaticamente de acordo com suas escolhas.\n\n'
+	echo -e '\b Nesta etapa sao 3 aplicativos, deles, podera escolher:\n\n'
+	echo -e '\b Digite (V) para instalacao e configuracao do Virtual Box.'
+	echo -e '\b Digite (F) para instalacao e configuracao do Flash Current'
+	echo -e '\b Digite (R) para instalacao e configuracao de Remasterizador.'
+	echo -e '\b Digite (K) para adicionar Removedor de Kernels antigos.\n\n'
+	echo -e '\b Digite (Q) para terminar esta etapa e sair da configuracao.'
+	else
+if (lsb_release -cs | grep -i utopic)
+		then
+	clear
+	echo -e '\n Iniciando etapa Aplicativos Opcionais...\n'
+	echo -e '\b Nesta etapa irei perguntar se deseja instalar o aplicativo opcional ou nao.'
+	echo -e '\b E irei configurar automaticamente de acordo com suas escolhas.\n\n'
+	echo -e '\b Nesta etapa sao 3 aplicativos, deles, podera escolher:\n\n'
+	echo -e '\b Digite (V) para instalacao e configuracao do Virtual Box.'
+	echo -e '\b Digite (F) para instalacao e configuracao do Flash Current'
+	echo -e '\b Digite (R) para instalacao e configuracao de Remasterizador.'
+	echo -e '\b Digite (K) para adicionar Removedor de Kernels antigos.\n\n'
+	echo -e '\b Digite (Q) para terminar esta etapa e sair da configuracao.'
+	else
+if (lsb_release -cs | grep -i vivid)
+		then
+	clear
+	echo -e '\n Iniciando etapa Aplicativos Opcionais...\n'
+	echo -e '\b Nesta etapa irei perguntar se deseja instalar o aplicativo opcional ou nao.'
+	echo -e '\b E irei configurar automaticamente de acordo com suas escolhas.\n\n'
+	echo -e '\b Nesta etapa sao 3 aplicativos, deles, podera escolher:\n\n'
+	echo -e '\b Digite (V) para instalacao e configuracao do Virtual Box.'
+	echo -e '\b Digite (F) para instalacao e configuracao do Flash Current'
+	echo -e '\b Digite (R) para instalacao e configuracao de Remasterizador.'
+	echo -e '\b Digite (K) para adicionar Removedor de Kernels antigos.\n\n'
+	echo -e '\b Digite (Q) para terminar esta etapa e sair da configuracao.'
+	else
+	echo -e '\n Iniciando etapa Aplicativos Opcionais...\n'
+	echo -e '\b Nesta etapa irei perguntar se deseja instalar o aplicativo opcional ou nao.'
+	echo -e '\b E irei configurar automaticamente de acordo com suas escolhas.\n\n'
+	echo -e '\b Seu sistema foi identificado como uma derivacao do Ubuntu,\n\b portanto, por seguranca ira aparecer apenas 2 aplicativos nesta etapa.\n\b Instale por sua propria conta e risco.'
+	echo -e '\b Dos aplicativos, voce podera escolher:\n\n'
+	echo -e '\b Digite (V) para instalacao e configuracao do Virtual Box.'
+	echo -e '\b Digite (F) para instalacao e configuracao do Flash Current'
+	echo -e '\b Digite (K) para adicionar Removedor de Kernels antigos.\n\n'
+	echo -e '\b Digite (Q) para terminar esta etapa e sair da configuracao.'
+fi
+fi
+fi
+fi
+fi
+read opcao
+case $opcao in
+	V|v) VirtualBoxInst ;;
+	F|f) FlashCurrentInst ;;
+	R|r) RemasterizadorInst ;;
+	C|c) ConvidadoDes ;;
+	P|p) RemotoDes ;;
+	K|k) KernelsPurge ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo  ; Opcional1 ;;
+esac
+			else
+clear
+echo -e "Nao ha como executar esta acao!"
+echo -e "Voltando ao menu principal..."
+read -t 30
+$XUBAPPPNC
+fi
+}
+Sair() {
+	clear
+	echo -e '\n Saindo da configuracao...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	exit 0
+}
+VirtualBoxInst() {
+	clear
+	echo -e '\n Instalando pacote Virtual Box...\n'
+	echo -e '\b VirtualBox é uma solução de virtualização de PC poderoso \n que lhe permite executar uma grande gama de sistemas operacionais \n de PC em seu sistema Linux. Isto inclui o Windows, Linux, FreeBSD, \n DOS, OpenBSD e outros.\n\n'
+	echo -e	'\b Digite (C) se deseja Continuar e instalar o Virtual Box.'
+	echo -e '\b Digite (O) para Voltar ao menu principal de "Aplicativos Opcionais".'
+	echo -e '\b Digite (Q) para terminar e sair da configuracao.'
+read opcao
+case $opcao in
+	C|c) VirtualBoxInst1 ;;
+	O|o) Opcional1 ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo  ; VirtualBoxInst ;;
+esac
+}
+VirtualBoxInst1() {
+	echo 'Instalando pacote...'
+	read -t 5
+echo "Preparando para instalar as dependencias do VirtualBox..."
+read -t 10
+sudo apt-get -y install linux-headers-$(uname -r) libasound2 libpulse0 libsdl-ttf2.0-0 dkms gcc make binutils libgl1-mesa-glx python-central
+read -t 10
+clear
+echo "A instalar o VirtualBox..."
+read -t 10
+sudo apt-get -y install virtualbox virtualbox-dkms virtualbox-qt virtualbox-source virtualbox-guest-additions-iso
+sudo /etc/init.d/virtualbox restart
+read -t 5
+sudo wget -c "http://download.virtualbox.org/virtualbox/$(vboxmanage -v | cut -d '_' -f 1)/Oracle_VM_VirtualBox_Extension_Pack-$(vboxmanage -v | cut -d '_' -f 1)-$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack" -O "/tmp/Oracle_VM_VirtualBox_Extension_Pack-$(vboxmanage -v | cut -d '_' -f 1)-$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack"
+read -t 10
+clear
+echo "A instalar a extencao do VirtualBox..."
+sudo VBoxManage extpack install "/tmp/Oracle_VM_VirtualBox_Extension_Pack-$(vboxmanage -v | cut -d '_' -f 1)-$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack" --replace
+read -t 10
+clear
+echo "Habilitando suporte ao USB no VirtualBox ..."
+sudo sed -i 's/SUBSYSTEM=="usb_device",/SUBSYSTEM=="usb_device", GROUP="vboxusers", MODE="0666",/g' /lib/udev/rules.d/40-virtualbox.rules
+sudo sed -i 's/ENV{DEVTYPE}=="usb_device",/ENV{DEVTYPE}=="usb_device", GROUP="vboxusers", MODE="0666",/g' /lib/udev/rules.d/40-virtualbox.rules
+read -t 3
+clear
+echo "Adicionando usuario no grupo vboxuser ..."
+read -t 5
+if [ ! "$(grep ^vboxusers /etc/group | grep "$SUDO_USER")" ]; then
+sudo usermod -a -G vboxusers "$SUDO_USER"
+fi
+read -t 3
+#clear
+echo "Adicionando comando para atualizar a extensao com mais facilidade pelo terminal"
+read -t 5
+sudo touch /usr/bin/update-vbox-extension
+sudo rm -rf /usr/bin/update-vbox-extension
+sudo touch /usr/bin/update-vbox-extension
+sudo chmod +x /usr/bin/update-vbox-extension
+sudo sh -c 'cat > /usr/bin/update-vbox-extension <<EOF
+#!/bin/bash
+EOF'
+sudo sh -c 'echo -e "VBoxManage extpack uninstall \$(vboxmanage -v | cut -d r -f 2) --force" >> /usr/bin/update-vbox-extension'
+sudo sh -c 'echo -e "wget -c \"http://download.virtualbox.org/virtualbox/\$(vboxmanage -v | cut -d '_' -f 1)/Oracle_VM_VirtualBox_Extension_Pack-\$(vboxmanage -v | cut -d '_' -f 1)-\$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack\" -O \"/tmp/Oracle_VM_VirtualBox_Extension_Pack-\$(vboxmanage -v | cut -d '_' -f 1)-\$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack\"" >> /usr/bin/update-vbox-extension'
+sudo sh -c 'echo -e "sleep 3" >> /usr/bin/update-vbox-extension'
+sudo sh -c 'echo -e "sudo VBoxManage extpack install \"/tmp/Oracle_VM_VirtualBox_Extension_Pack-\$(vboxmanage -v | cut -d '_' -f 1)-\$(vboxmanage -v | cut -d 'r' -f 2).vbox-extpack\" --replace" >> /usr/bin/update-vbox-extension'
+echo "Para fazer o update apos atualizar o VirtualBox via terminal, faca o comando (update-vbox-extension)"
+read -t 10
+clear
+echo "Veja se o usuario esta adicionado no grupo vboxuser, se nao tiver, adicione manualmente"
+read -t 10
+clear
+read -p "Aguarde 30 Segs ou aperte ENTER."
+	read -t 30
+	clear
+	VirtualBoxInst2
+}
+VirtualBoxInst2() {
+	clear
+	echo -e '\n Instalacao e configuracao do pacote "Virtual Box" concluida.\n'
+	echo -e '\b Digite (O) para Voltar ao menu principal de "Aplicativos Opcionais".'
+	echo -e '\b Digite (Q) para terminar e sair da configuracao.'
+read opcao
+case $opcao in
+	O|o) Opcional1 ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo  ; VirtualBoxInst2 ;;
+esac
+}
+Sair() {
+	clear
+	echo -e '\n Saindo da configuracao...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	exit 0
+}
+FlashCurrentInst() {
+	clear
+	echo -e '\n Instalação do Flash Current...\n'
+	echo -e '\b Flash Current é a instalação do pacote "pipelight-multi"\n\b Com este aplicativo seus navegadores terão os plugins mais atuais\n\b Como o Flash, Silverlight e Widevine. Acabando com problemas em alguns sites\n\n'
+	echo -e	'\b Digite (F) se deseja Continuar e instalar o Flash Current.'
+	echo -e '\b Digite (O) para Voltar ao menu principal de "Aplicativos Opcionais".'
+	echo -e '\b Digite (Q) para terminar e sair da configuracao.'
+read opcao
+case $opcao in
+	C|c) FlashCurrentInst1 ;;
+	O|o) Opcional1 ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo  ; FlashCurrentInst ;;
+esac
+}
+FlashCurrentInst1() {
+
+	echo -e 'Iniciando a instalação do Flash Current...'
+	read -t 5
+sudo apt-get install pipelight-multi
+echo -e '\b Instalando os plugins necessários.'
+read -t 2
+echo -e '\b Os navegadores devem estar fechados para esta etapa...'
+read -t 5
+sudo pipelight-plugin -y  --enable flash --enable silverlight --enable widevine
+sudo touch /usr/bin/pipelight-update
+sudo sh -c 'echo "#!/bin/bash\n\n" >> /usr/bin/pipelight-update'
+sudo sh -c 'echo "xterm -e \"pipelight-plugin -y --update\"" >> /usr/bin/pipelight-update'
+sudo chmod +x /usr/bin/pipelight-update
+## Se o Silverlight nao funcionar
+#rm -rf ~/.wine-pipelight/
+#sudo pipelight-plugin -y --update
+#sudo chown -R $USER.$USER $HOME/.gnupg
+## Fim Silverlight
+## Verificacao durante o login
+#mkdir -p ~/.config/autostart
+#touch ~/.config/autostart/pipelight-start.desktop
+#echo -e '[Desktop Entry]' >> ~/.config/autostart/pipelight-start.desktop
+#echo -e 'Name=Pipelight Start' >> ~/.config/autostart/pipelight-start.desktop
+#echo -e 'Exec=pipelight-update' >> ~/.config/autostart/pipelight-start.desktop
+#echo -e 'Type=Application' >> ~/.config/autostart/pipelight-start.desktop
+#chmod +x ~/.config/autostart/pipelight-start.desktop
+## Fim Verificacao
+read -2
+echo -e '\n\b Instalação dos plugins terminada.\n\b De tempos em tempos, é bom atualizar os plugins.\n\b Para fazer a atualizacao, faça o comando "pipelight-update" (sem aspas)'
+read -t 10
+clear
+read -p "Aguarde 30 Segs ou aperte ENTER."
+	read -t 30
+	clear
+	FlashCurrentInst2
+}
+FlashCurrentInst2() {
+	clear
+	echo -e '\n Instalacao e configuracao do pacote "Flash Current" concluida.\n'
+	echo -e '\b Digite (O) para Voltar ao menu principal de "Aplicativos Opcionais".'
+	echo -e '\b Digite (Q) para terminar e sair da configuracao.'
+read opcao
+case $opcao in
+	O|o) Opcional1 ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo  ; FlashCurrentInst2 ;;
+esac
+}
+Sair() {
+	clear
+	echo -e '\n Saindo da configuracao...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	exit 0
+}
+RemasterizadorInst() {
+	clear
+	echo -e '\n Instalacao pacotes Remasterizacao...\n'
+	echo -e '\b Neste item da etapa, temos 2 opcoes de instalacao, Sao eles:\n\n'
+	echo -e '\n Ubuntu Customization Kit (UCK)\n Ferramenta para customizacao oficial do Ubuntu Live CD.\n Incluindo Kubuntu/Xubuntu e Edubuntu. Voce pode adicionar qualquer \n pacote para o sistema Live como, por exemplo, pacotes de idiomas, \n aplicativos, etc.'
+	echo -e '\n Remastersys.\n Ubuntu e um sistema de remasterizacao variavel. E este aplicativo cria \n um LiveCD do sistema instalado. Com ele, voce pode fazer um LiveCD de \n distribuicao ou copia de seguranca do seu sistema.'
+	echo -e '\n Digite (U) para instalar o pacote UCK.'
+	echo -e '\b Digite (R) para instalar o pacote Remastersys'
+	echo -e '\b Digite (O) para Voltar ao menu principal de "Aplicativos Opcionais".'
+	echo -e '\b Digite (Q) para terminar e sair da configuracao.'
+read opcao
+case $opcao in
+	U|u) RemasterizadorInst1 ;;
+	R|r) RemasterizadorInst3 ;;
+	O|o) Opcional1 ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo  ; RemasterizadorInst ;;
+esac
+}
+RemasterizadorInst1() {
+	echo 'Instalando pacote...'
+	read -t 5
+sudo apt-get -y install uck libfribidi0
+read -p "Aguarde 30 Segs ou aperte ENTER."
+	read -t 30
+	clear
+	RemasterizadorInst2
+}
+RemasterizadorInst2() {
+	clear
+	echo -e '\n Instalacao e configuracao do pacote "UCK" concluida.\n'
+	echo -e '\b Digite (O) para Voltar ao menu principal de "Aplicativos Opcionais".'
+	echo -e '\b Digite (Q) para terminar e sair da configuracao.'
+read opcao
+case $opcao in
+	O|o) Opcional1 ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo  ; RemasterizadorInst2 ;;
+esac
+}
+Sair() {
+	clear
+	echo -e '\n Saindo da configuracao...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	exit 0
+}
+RemasterizadorInst3() {
+	echo 'Instalando pacote...'
+	read -t 5
+sudo apt-get -y install remastersys
+read -p "Aguarde 30 Segs ou aperte ENTER."
+	read -t 30
+	clear
+	RemasterizadorInst4
+}
+RemasterizadorInst4() {
+	clear
+	echo -e '\n Instalacao e configuracao do pacote "Remastersys" concluida.\n'
+	echo -e '\b Digite (O) para Voltar ao menu principal de "Aplicativos Opcionais".'
+	echo -e '\b Digite (Q) para terminar e sair da configuracao.'
+read opcao
+case $opcao in
+	O|o) Opcional1 ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo  ; RemasterizadorInst4 ;;
+esac
+}
+Sair() {
+	clear
+	echo -e '\n Saindo da configuracao...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	exit 0
+}
+ConvidadoDes() {
+	clear
+	echo -e '\n Desativar Usuario "Convidado".\n'
+	echo -e '\b Por padrao, o Ubuntu e fornecido com a conta de convidado habilitada\n e mostrado na tela de login. A sessao de convidado do Ubuntu e um\n recurso que possibilita de maneira conveniente o emprestimo do seu\n computador a outras pessoas mas nos dando um alto nivel de segurança.\n Com isso as pastas dos usuarios ficam protegidas e sempre que for\n feito um logout as configuracoes e arquivos salvos por este usuario\n no disco serao perdidos.\n\n Para a maioria dos usuarios Home Desktop, este recurso nao e necessario.\n Entao se  deseja desabilitar esse recurso.'
+	echo -e '\n Digite (C) para continuar.'
+	echo -e '\b Digite (O) para Voltar ao menu principal de "Aplicativos Opcionais".'
+	echo -e '\b Digite (Q) para terminar e sair da configuracao.'
+read opcao
+case $opcao in
+	C|c) ConvidadoDes0 ;;
+	O|o) Opcional1 ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo  ; ConvidadoDes ;;
+esac
+}
+ConvidadoDes0() {
+	clear
+	echo -e '\n Desativando Usuario "Convidado".\n'
+	read -t 5
+sudo sh -c 'echo "allow-guest=false" >> /etc/lightdm/lightdm.conf'
+echo -e '\n Conta ocultada, para o ativar novamente edite o arquivo\n /etc/lightdm/lightdm.conf\n\n E comente a linha allow-guest=false'
+	clear
+	echo -e '\n Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+	ConvidadoDes1
+}
+ConvidadoDes1() {
+	clear
+	echo -e '\n Configuracao da conta "Convidado" concluida.'
+	echo -e '\b Deve-se reiniciar para surtir o efeito.\n'
+	echo -e '\b Digite (O) para Voltar ao menu principal de "Aplicativos Opcionais".'
+	echo -e '\b Digite (Q) para terminar e sair da configuracao.'
+read opcao
+case $opcao in
+	O|o) Opcional1 ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo  ; Continuar1 ;;
+esac
+}
+Sair() {
+	clear
+	echo -e '\n Saindo da configuracao...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	exit 0
+}
+RemotoDes() {
+	clear
+	echo -e '\n Desativar Usuario "Remoto".\n'
+	echo -e '\b O "Acesso remoto" na tela de login esta habilitado por padrao desde\n o Ubuntu 12.10, atraves dessa opcao e possivel acessar um servidor\n remoto sem a necessidade de logar primeiro na maquina.\n Para a maioria dos usuarios Home Desktop, este recurso nao e necessario.\n Entao se deseja desabilitar esse recurso.'
+	echo -e '\n Digite (C) para continuar.'
+	echo -e '\b Digite (O) para Voltar ao menu principal de "Aplicativos Opcionais".'
+	echo -e '\b Digite (Q) para terminar e sair da configuracao.'
+read opcao
+case $opcao in
+	C|c) RemotoDes0 ;;
+	O|o) Opcional1 ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo  ; RemotoDes ;;
+esac
+}
+RemotoDes0() {
+	clear
+	echo -e '\n Desativando Usuario "Convidado".\n'
+	read -t 5
+sudo sh -c 'echo "greeter-show-remote-login=false" >> /etc/lightdm/lightdm.conf'
+echo -e '\n Conta desativada. Para o ativar novamente edite o arquivo\n /etc/lightdm/lightdm.conf\n\n E comente a linha greeter-show-remote-login=false'
+	clear
+	echo -e '\n Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+	RemotoDes1
+}
+RemotoDes1() {
+	clear
+	echo -e '\n Configuracao da conta "Remota" concluida.'
+	echo -e '\b Deve-se reiniciar para surtir o efeito.\n'
+	echo -e '\b Digite (O) para Voltar ao menu principal de "Aplicativos Opcionais".'
+	echo -e '\b Digite (Q) para terminar e sair da configuracao.'
+read opcao
+case $opcao in
+	O|o) Opcional1 ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo  ; Continuar1 ;;
+esac
+}
+Sair() {
+	clear
+	echo -e '\n Saindo da configuracao...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	exit 0
+}
+KernelsPurge() {
+	clear
+	echo -e '\n Adicionar comando "purge-kernels-antigos".\n'
+	echo -e '\b Conforme vamos atualizando o sistema e consequentemente o Kernel, com o passar\n do tempo acumula-se as versoes antigas que acabam apenas ocupando espaco no HD.\n Para "limpar" o sistema com pacotes de versoes de Kernels antigos, basta\n adicionar este comando criado no sistema e o executar sempre que necessario.\n Lembre de testar o novo Kernel e ter certeza de que funciona corretamente antes de remover os antigos e tome muito cuidado.'
+	echo -e '\n Digite (C) para continuar e adicionar o comando ao sistema.'
+	echo -e '\b Digite (O) para Voltar ao menu principal de "Aplicativos Opcionais".'
+	echo -e '\b Digite (Q) para terminar e sair da configuracao.'
+read opcao
+case $opcao in
+	C|c) KernelsPurge0 ;;
+	O|o) Opcional1 ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo  ; KernelsPurge ;;
+esac
+}
+KernelsPurge0() {
+	clear
+	echo -e '\n Adicionando comando "purge-kernels-antigos".\n'
+	read -t 5
+sudo sh -c 'touch /usr/bin/purge-kernels-antigos'
+sudo sh -c 'rm -r /usr/bin/purge-kernels-antigos'
+sudo sh -c 'touch /usr/bin/purge-kernels-antigos'
+sudo sh -c 'chmod 777 /usr/bin/purge-kernels-antigos'
+sudo sh -c 'cat > /usr/bin/purge-kernels-antigos' <<EOF
+#!/bin/bash
+dpkg -l 'linux-*' | sed '/^ii/!d;/'"\$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | xargs sudo apt-get -y purge
+EOF
+sudo sh -c 'chmod 755 /usr/bin/purge-kernels-antigos'
+	clear
+	echo -e '\n Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	clear
+	KernelsPurge1
+}
+KernelsPurge1() {
+	clear
+	echo -e '\n Adicao do comando "purge-kernels-antigos" concluida.'
+	echo -e '\b Este comando esta por sua propria conta e risco, tenha cuidado.\n'
+	echo -e '\b Digite (O) para Voltar ao menu principal de "Aplicativos Opcionais".'
+	echo -e '\b Digite (Q) para terminar e sair da configuracao.'
+read opcao
+case $opcao in
+	O|o) Opcional1 ;;
+	Q|q) Sair ;;
+	*) "Opcao invalida" ; echo  ; Continuar1 ;;
+esac
+}
+Sair() {
+	clear
+	echo -e '\n Saindo da configuracao...'
+	echo -e '\b Espere 30 segundos ou aperte "Enter".'
+	read -t 30
+	exit 0
+}
+Opcional1
+
+		else
+	echo -e 'Servico xubapp indisponivel!'
+fi

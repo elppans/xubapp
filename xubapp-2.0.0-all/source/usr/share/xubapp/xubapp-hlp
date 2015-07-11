@@ -1,0 +1,16 @@
+
+xubapp. Um aplicativo em modo texto interativo e de fácil utilização para uso pós instalação e manutenção do sistema.
+Com ele podemos adicionar os principais repositórios e instalar os principais aplicativos em sua Distro com facilidade.
+
+Uso:	xubapp [OPÇÃO]
+
+Opções:
+
+--start|-s			Iniciar o aplicativo em seu modo padrão
+--start-menu|-sm		Acesso direto ao Menú Principal
+--add-rep|-ar			Adiciona recursivamente os repositórios em que o aplicativo usa para instalação de outros aplicativos
+--upgrade|-u			Faz um upgrade do sistema "Recursivo" no sistema
+--compilers-maintenance|-cm	Acesso direto ao menú "Compiladores e Manutenção"
+--multimedia-codecs|-mc		Acesso direto ao menú "Multimedia e Codecs"
+--optional-applications|-o	Acesso direto ao menú de aplicativos "Opcionais"
+--help|-h			Este menú Help
