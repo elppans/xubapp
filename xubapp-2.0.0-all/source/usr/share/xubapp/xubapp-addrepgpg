@@ -279,7 +279,7 @@ clear
 #sudo apt-get -y dist-upgrade
 #read -t 10
 #clear
-if ( cat $CXUBAG | grep "xubapp-addrepgpg-menu-off" )
+if ( cat $CXUBAG | grep "xubapp-addrepgpg-menu-off" ) >> /dev/null
 			then
 	read -t 3
 	exit 0
