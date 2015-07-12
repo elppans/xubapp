@@ -23,7 +23,7 @@ if [ -e $XUBAPPINIT ]
 		then
 if [ -e $XUBAPPAVS ]
 			then
-	sudo sh -c 'echo -e ""' > $CREPGPG
+	sudo sh -c 'echo ""' > $CREPGPG
 	$XUBAPPAVS
 	clear
 			else
@@ -42,7 +42,7 @@ if [ -e $XUBAPPINIT ]
 		then
 if [ -e $XUBAPPPNC ]
 			then
-	sudo sh -c 'echo -e ""' > $CREPGPG
+	sudo sh -c 'echo ""' > $CREPGPG
 	$XUBAPPPNC
 	clear
 			else
@@ -61,7 +61,7 @@ if [ -e $XUBAPPINIT ]
 		then
 if [ -e $XUBAPPADG ]
 			then
-	sudo sh -c 'echo -e "xubapp-addrepgpg-menu-off"' > $CXUBAG
+	sudo sh -c 'echo "xubapp-addrepgpg-menu-off"' > $CXUBAG
 	$XUBAPPADG
 	clear
 			else
@@ -80,7 +80,7 @@ if [ -e $XUBAPPINIT ]
 		then
 if [ -e $XUBAPPUPG ]
 			then
-	sudo sh -c 'echo -e "xubapp-upgrade-menu-off"' > $CXUBUPG
+	sudo sh -c 'echo "xubapp-upgrade-menu-off"' > $CXUBUPG
 	$XUBAPPUPG
 	clear
 			else
@@ -99,7 +99,7 @@ if [ -e $XUBAPPINIT ]
 		then
 if [ -e $XUBAPPCP ]
 			then
-	sudo sh -c 'echo -e ""' > $CXUBCM
+	sudo sh -c 'echo ""' > $CXUBCM
 	$XUBAPPCP
 	clear
 			else
@@ -118,7 +118,7 @@ if [ -e $XUBAPPINIT ]
 		then
 if [ -e $XUBAPPMT ]
 			then
-	sudo sh -c 'echo -e ""' > $CXUBMC
+	sudo sh -c 'echo ""' > $CXUBMC
 	$XUBAPPMT
 	clear
 			else
@@ -137,7 +137,7 @@ if [ -e $XUBAPPINIT ]
 		then
 if [ -e $XUBAPPOPT ]
 			then
-	sudo sh -c 'echo -e ""' > $CXUBOP
+	sudo sh -c 'echo ""' > $CXUBOP
 	$XUBAPPOPT
 	clear
 			else
@@ -173,7 +173,7 @@ fi
 if [ -e $XUBAPPINIT ]
 		then
 	echo -e 'Deve usar as opcoes:
-		xubapp {start|--start-menu|--add-rep|--upgrade|--compilers-maintenance|--multimedia-codecs|--optional-applications|--help|-h}'
+		xubapp {--start|--start-menu|--add-rep|--upgrade|--compilers-maintenance|--multimedia-codecs|--optional-applications|--help|-h}'
 		else
 	echo -e 'Servico xubapp indisponivel!'
 fi

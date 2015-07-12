@@ -80,7 +80,7 @@ cd -
 #Fim "BADSIG ID"
 #	sudo apt-get -y dist-upgrade
 	clear
-if ( cat $CXUBUPG | grep "xubapp-upgrade-menu-off" | sed -n 1p )
+if ( cat $CXUBUPG | grep "xubapp-upgrade-menu-off" )
 			then
 	read -t 3
 	exit 0
